@@ -1,4 +1,4 @@
-###Valentine Letter
+# Valentine Letter
 Description:
 
 Valentine Letter is a 2D pixel art game that combines elements of a dating simulator and a role-playing game (RPG). In this adventure, players navigate through tile-based environments, interact with various creatures, and embark on a heartfelt journey to find a girl and deliver Valentine's letters after a charming mishap.
