@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine Letters - Game</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+  </head>
+  <body>
+    <style>
+      @font-face {
+        font-family: monogram;
+        src: url(monogram.ttf);
+      }
+
+      body {
+        font-family: monogram, monospace;
+        font-size: 2rem;
+        overflow: hidden;
+        background-color: black;
+        animation: fadeInPage 2s ease-in-out; 
+      }
+       /* 🎭 Fade-in Effect */
+       @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      /* 🎭 Page Fade-in */
+      @keyframes fadeInPage {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      #app {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      /* ✨ Upgraded Dialogue Box */
+      #textbox {
+        position: absolute;
+        left: 10%;
+        right: 10%;
+        bottom: 2vh;
+        min-height: 12vh;
+        background: rgba(255, 255, 255, 0.9); /* Semi-transparent */
+        border-radius: 12px; /* Smoother edges */
+        outline: 3px solid rgb(87, 87, 87); /* Thicker outline for contrast */
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        word-spacing: 0.2rem;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); /* Glowing effect */
+        animation: fadeIn 0.5s ease-in-out, slideUp 0.5s ease-in-out; /* Smooth fade-in and sliding up effect */
+      }
+
+      /* 🎭 Fade-in Effect */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      /* 📜 Slide-Up Effect */
+      @keyframes slideUp {
+        from { transform: translateY(20px); }
+        to { transform: translateY(0); }
+      }
+
+      /* 📜 Styled Text */
+      .ui-text {
+        margin: 0;
+        user-select: none;
+        font-size: 1.8rem;
+        color: rgb(50, 50, 50); /* Dark text for readability */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+      }
+
+      /* 🔘 Upgraded Close Button */
+      .ui-close-btn {
+        font-family: monogram, monospace;
+        background: rgb(50, 50, 50);
+        color: white;
+        border: 2px solid white;
+        border-radius: 5px;
+        padding: 0.8rem 1.5rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        opacity: 0;
+        animation: fadeIn 0.5s ease-in-out 0.5s forwards; /* Smooth fade-in for the button */
+      }
+
+      /* Hover & Active Effects */
+      .ui-close-btn:hover {
+        background: white;
+        color: rgb(50, 50, 50);
+      }
+
+      .ui-close-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* 🎛 Button Container */
+      .btn-container {
+        align-self: flex-end;
+        margin-top: 1rem;
+      }
+
+      /* 📝 Instruction Note */
+      .note {
+        position: absolute;
+        left: 5%;
+        top: 1vh;
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+        color: rgb(238, 238, 238);
+        background-color: rgba(0, 0, 0, 0.8);
+        border: 2px solid white;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+        animation: fadeIn 0.5s ease-in-out, slideUp 0.5s ease-in-out 0.5s; /* Added transition effects */
+      }
+
+      #key-dialogue {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8); /* Darker background for more contrast */
+  color: #f2f2f2; /* Light text color */
+  border: 3px solid #ffcc00; /* Golden border for a more "gamey" feel */
+  border-radius: 15px;
+  display: none; /* Initially hidden */
+  text-align: center;
+  z-index: 100;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.8); /* Glow effect on the border */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Close Button Styling */
+#close-dialogue {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background-color: #F4C430;
+  color: #222;
+  border: 2px solid #f2f2f2;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Close Button Hover Effect */
+#close-dialogue:hover {
+  background-color: #f2f2f2;
+  color: #F4C430;
+  transform: scale(1.05); /* Slight grow effect for hover */
+}
+
+    </style>
+
+<audio id="title-audio" autoplay loop>
+    <source src="cute.mp3" type="audio/mp3">
+</audio>
+    <div id="app">
+      <div>
+        <p class="note"> Click around to move </p>
+
+      <div id="key-icon" style="position: fixed; top:5%; right: 10px; transform: translateY(-50%); display: none; ">
+          <img src="keyyyy.png" alt="Key" width="50" height="50"/>
+        </div>
+        <div id="key-dialogue" style="display: none;">
+          <p id="dialogue-message"></p>
+          <button id="close-dialogue">Close</button>
+        </div>
+        
+
+        <div id="textbox-container" style="display: none">
+          <div id="textbox">
+            <p id="dialogue" class="ui-text"></p>
+            <div class="btn-container">
+              <button id="close" class="ui-close-btn">Close</button>
+            </div>
+          </div>
+        </div>
+      </div> 
+       
+      <canvas id="game"></canvas>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

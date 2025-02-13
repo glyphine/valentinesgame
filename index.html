@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Letter</title>
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+  <style>
+    @font-face {
+      font-family: monogram;
+      src: url(monogram.ttf);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: monogram, monospace;
+      background-color: black;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* 🎥 Video Background */
+    #video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    /* 🎭 Title Screen */
+    #title-screen {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    /* 🎮 Game Title */
+    .game-title {
+      font-size: 6rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      animation: titleGlow 1.5s infinite alternate ease-in-out;
+    }
+
+    /* 🎭 Subtle glow effect */
+    @keyframes titleGlow {
+      from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
+      to { text-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+    }
+
+    /* 🎮 Press to Start Text */
+    .press-start {
+      font-size: 2rem;
+      margin-top: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* 🎭 Conversation Scene */
+    #conversation-scene {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    #dialogue-screen {
+      width: 80%;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 1;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    /* 📜 Self-Dialogue */
+    .self-dialogue {
+      font-size: 2rem;
+      opacity: 0;
+      animation: fadeInText 2s forwards;
+      max-width: 80%;
+      line-height: 1.5;
+    }
+
+    /* 🎭 Text Fade-in */
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 🎭 Background Fade-In */
+    #background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pretty.jpg') no-repeat center center;
+      background-size: cover;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    /* 📜 Chat Box */
+    #chat-box {
+      position: absolute;
+      bottom: 10px;
+      width: 80%;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid white;
+      border-radius: 10px;
+      display: none;
+      text-align: left;
+      font-size: 2rem;
+    }
+
+    #chat-box button {
+      font-family: monogram, monospace;
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 2rem;
+      border: white;
+      outline: none;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    #chat-box button:hover {
+      background-color: #ccc;
+      color: black;
+    }
+
+
+    .no-valentine {
+  color: red;
+  font-size: 3.5rem;  
+  font-weight: bold;
+  position: fixed;  
+  top: 50%;  
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  text-align: center; 
+  z-index: 100;  
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 🎥 Background Video -->
+  <video id="video-bg" autoplay loop muted>
+    <source src="bgg.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- 🎮 Title Screen -->
+  <div id="title-screen">
+    <h1 class="game-title">Valentine Letter</h1>
+    <p class="press-start">Press Enter to Start</p>
+  </div>
+
+  
+  <div id="conversation-scene">
+    <div id="dialogue-screen">
+      <p class="self-dialogue" id="line1">"What is this...?"</p>
+      <p class="self-dialogue" id="line2" style="animation-delay: 2s; opacity: 0;">"My girlfriend is running away after she handed me a letter..."</p>
+      <p class="self-dialogue" id="line3" style="animation-delay: 4s; opacity: 0;">"And it was empty..."</p>
+    </div>
+
+    <!-- Background Fade-In -->
+    <div id="background"></div>
+
+    <!-- 📜 Chat Box -->
+    <div id="chat-box">
+      <p>What will you do?</p>
+      <button id="yess">Go find her</button>
+      <button id="noo">"What a weirdo.. Its probably nothing"</button>
+    </div>
+  </div>
+
+  <!-- Background Music for Title Screen -->
+  <audio id="title-audio" autoplay loop>
+    <source src="intro.mp3" type="audio/mp3">
+</audio>
+
+  <script>
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        // Fade out title screen
+        document.getElementById("title-screen").style.opacity = "0";
+        document.getElementById("video-bg").style.opacity = "0";
+        document.getElementById("title-audio").pause(); // Pause the title audio
+
+        setTimeout(() => {
+          document.getElementById("title-screen").style.display = "none";
+          document.getElementById("video-bg").pause();
+          startConversation();
+        }, 1500); // Delay to allow fade effect
+      }
+    });
+
+    function startConversation() {
+      document.getElementById("conversation-scene").style.display = "flex";
+      const conversationAudio = new Audio('haha.mp3');
+      conversationAudio.play();  // Play audio during conversation
+
+      setTimeout(() => { document.getElementById("line2").style.opacity = 1; }, 2000);
+      setTimeout(() => { document.getElementById("line3").style.opacity = 1; }, 4000);
+
+      // Fade in background
+      setTimeout(() => {
+        document.getElementById("dialogue-screen").style.opacity = 0;
+        document.getElementById("background").style.opacity = 1;
+      }, 6000);
+
+      // Show Chat Box
+      setTimeout(() => {
+        document.getElementById("chat-box").style.display = "block";
+      }, 8000);
+    }
+
+    // Event listener for "Go find her"
+    document.getElementById("yess").addEventListener("click", () => {
+      startGame();
+    });
+
+    // Event listener for "Sleep it off"
+    document.getElementById("noo").addEventListener("click", () => {
+      showNoValentineMessage();
+    });
+
+    function startGame() {
+      window.location.href = "startgame.html"; 
+    }
+
+function showNoValentineMessage() {
+  let counter = 0;
+  const messageContainer = document.getElementById("conversation-scene");
+
+  const messageInterval = setInterval(() => {
+    if (counter < 1) {
+      // Create the message element
+      const noValentineMsg = document.createElement("div");
+      noValentineMsg.classList.add("no-valentine");
+      noValentineMsg.textContent = "NO VALENTINE DATE FOR YOU!";
+      messageContainer.appendChild(noValentineMsg);
+
+      counter++; 
+    } else {
+      // Stop the loop and exit the game after displaying 5 messages
+      clearInterval(messageInterval);
+      exitGame();
+    }
+  }, 100); // Show the message every 1 second
+}
+
+function exitGame() {
+  // Redirect to a game over page or close the window after 1 second
+  setTimeout(() => {
+    window.location.href = "gameover.html"; // Redirect to the game over page
+    // Alternatively, you can use window.close() to close the current window if it is a popup
+  }, 1000); // Wait 1 second before closing or redirecting
+}
+
+  </script>
+
+</body>
+</html>

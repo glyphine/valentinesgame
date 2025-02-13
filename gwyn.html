@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gwyn's Letter</title>
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+  <style>
+    @font-face {
+      font-family: monogram;
+      src: url(monogram.ttf);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: monogram, monospace;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      overflow: hidden;
+      transition: opacity 1s ease-in-out;
+      opacity: 0;
+    }
+
+    #black-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #conversation-container {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 1s ease-in-out;
+      opacity: 0;
+    }
+
+    #chat-box {
+      width: 80%;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid white;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    #chat-box button {
+      font-family: monogram, monospace;
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 2rem;
+      border: 2px solid white;
+      outline: none;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    #chat-box button:hover {
+      background-color: #ccc;
+      color: black;
+    }
+  </style>
+</head>
+<body onload="fadeIn()">
+
+  <audio id="title-audio" autoplay loop>
+    <source src="haha.mp3" type="audio/mp3">
+</audio>
+
+  <div id="conversation-container">
+    <div id="chat-box">
+    
+    <p id="line1">"Gwyn: W-what are you doing here?"</p>  
+      <button onclick="nextDialogue(2)">"The letter you gave me, it's empty."</button>
+      <button onclick="nextDialogue(2)">"Don't play dumb with me..."</button>
+      <button onclick="nextDialogue(2)">"What's up with the letter? Is this a joke?"</button>
+    </div>
+  </div>
+
+  <div id="black-screen"></div>
+
+  <script>
+    function fadeIn() {
+      document.body.style.opacity = "1";
+      document.getElementById("conversation-container").style.opacity = "1";
+    }
+
+    function showBlackScreen(message, redirect = null) {
+      const blackScreen = document.getElementById("black-screen");
+      blackScreen.textContent = message;
+      blackScreen.style.display = "flex";
+      setTimeout(() => { blackScreen.style.opacity = "1"; }, 100);
+
+      setTimeout(() => {
+        if (redirect) {
+          window.location.href = redirect;
+        }
+      }, 3000);
+    }
+
+    function nextDialogue(step) {
+      document.getElementById('conversation-container').style.opacity = '0';
+      setTimeout(() => {
+        document.body.style.background = "url('bgg2.svg') no-repeat center center fixed";
+        document.body.style.backgroundSize = "cover";
+        document.getElementById('conversation-container').style.transition = 'opacity 1s ease-in-out';
+        setTimeout(() => {
+          if (step === 2) {
+            document.getElementById("conversation-container").innerHTML = `<div id="chat-box">
+              <p>"Gwyn: Oh.. T-the letter... I was trying to be romantic but unfortunately, I failed and gave you a blank piece of paper.."</p>
+              <button onclick="nextDialogue(3)">"Every day I spend with you is romantic enough.."</button>
+              <button onclick="nextDialogue(3)">"That's okay.. Just give me the real letter.."</button>
+              <button onclick="nextDialogue(3)">"Oh.. Is that your best attempt to be romantic?"</button>
+            </div>`;
+          } else if (step === 3) {
+            document.getElementById("conversation-container").innerHTML = `<div id="chat-box">
+              <p>"Gwyn: Erm.. Well, I want to make it up to you someday because I love you dearly :3"</p>
+              <button onclick="nextDialogue(4)">"I love you too! After this, let's go to a cat cafe and pet all the cats!"</button>
+              <button onclick="nextDialogue(4)">"I love you too, but don't change the topic. Where's the real letter?"</button>
+              <button onclick="nextDialogue(4)">"I need to rethink our entire relationship if you keep treating me like this.."</button>
+            </div>`;
+          } else if (step === 4) {
+            document.getElementById("conversation-container").innerHTML = `<div id="chat-box">
+              <p>"How will you convince Gwyn?"</p>
+              <button onclick="showBlackScreen('If I were you,', 'valentine.html')">"Please, I won't judge. Just let me read it."</button>
+              <button onclick="showBlackScreen('Dear Jonas, This is a fake letter, just like your hopes. Sincerely, Gwyn ;-;)')">"I will use all force necessary to get that letter."</button>
+              <button onclick="showBlackScreen('Gwyn glares at you and runs away, refusing to hand over the letter.', 'gameover.html')">"Give it to me now, Gwyn!"</button>
+            </div>`;
+          }
+          setTimeout(() => {
+        document.getElementById("message").textContent = "Happy Valentine's Day!";
+        document.getElementById("message").style.opacity = "1";
+      }, 4500);
+
+          document.getElementById('conversation-container').style.opacity = '1';
+        }, 400);
+      }, 200);
+    }
+
+  </script>
+
+</body>
+</html>

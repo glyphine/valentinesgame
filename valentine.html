@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Message</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'monospace';
+      background-color: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    #message {
+    font-family: monogram, monospace;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+  </style>
+</head>
+<body onload="fadeIn()">
+  <div id="message">If I were you, I’d turn your attention to the real Gwyn this very moment…</div>
+
+  <script>
+    function fadeIn() {
+      document.body.style.opacity = "1";
+      setTimeout(() => {
+        document.getElementById("message").style.opacity = "1";
+      }, 1000);
+      
+      setTimeout(() => {
+        document.getElementById("message").style.opacity = "0";
+      }, 5000);
+
+
+      setTimeout(() => {
+        document.getElementById("message").textContent = "Happy Valentine's Day!";
+        document.getElementById("message").style.opacity = "1";
+      }, 6000);
+    }
+  </script>
+</body>
+</html>

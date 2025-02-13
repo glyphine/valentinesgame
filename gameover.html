@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Over - Valentine Letters</title>
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+  <style>
+    @font-face {
+      font-family: monogram;
+      src: url(monogram.ttf);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: monogram, monospace;
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #game-over-container {
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+      padding: 2rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h1 {
+      font-size: 6rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      animation: fadeInTitle 2s ease-out;
+    }
+
+    #game-over-msg {
+      font-size: 2rem;
+      color: red;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInMessage 2s ease-out 1s forwards;
+    }
+
+    button {
+      font-family: monogram, monospace;
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      border-color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInButton 2s ease-out 2s forwards;
+    }
+
+    button:hover {
+      background-color: gray;
+      color: white;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInTitle {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInMessage {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInButton {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+  </style>
+</head>
+<body>
+    <audio id="title-audio" autoplay loop>
+        <source src="overva.mp3" type="audio/mp3">
+    </audio>
+
+  <div id="game-over-container">
+    <h1>Game Over</h1>
+    <p id="game-over-msg">You are teleported to Diddy room!</p>
+    <button onclick="retryGame()">Try again!</button>
+  </div>
+
+  <script>
+    // Retry the game
+    function retryGame() {
+      window.location.href = "index.html"; 
+    }
+  </script>
+
+</body>
+</html>
