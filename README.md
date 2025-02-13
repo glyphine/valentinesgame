@@ -19,7 +19,7 @@ Movement: Use the arrow keys to move your character.
 
 Interact: Press mouse click to interact with characters and objects.
 
-# Tech Stack:
+## Tech Stack:
 
 <b> Programming Language </b>: JavaScript
 
